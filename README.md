@@ -6,6 +6,7 @@ TBD:
 - [ ] replace wire hell with custom PCB shield;
 - [ ] bigger motor;
 - [ ] better on-shaft fixation;
+- [ ] replace kolhoz. 
 
 
 ![persp](https://github.com/m112521/notsoserous-science/assets/85460283/c4cb47e4-6cf4-4d17-a4c5-280009308a05)
