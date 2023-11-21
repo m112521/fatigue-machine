@@ -1,9 +1,9 @@
 # Fatigue strength testing machine
 
-TDB:
+TBD:
 - [ ] start button/tumbler;
 - [ ] better/faster stop mechanism;
-- [ ] PCB;
+- [ ] replace wire hell with custom PCB shield;
 - [ ] bigger motor;
 - [ ] better on-shaft fixation;
 
@@ -38,9 +38,15 @@ The process of generating new samples:
 ![gh-sim](https://github.com/m112521/notsoserous-science/assets/85460283/0fa1caf4-b1d9-4dbc-b486-403aa12baab0)
 
 
-## Testing sample
+## Testing samples
 
-If you wait long enough - it breaks (either sample or machine). 
+If you wait long enough it breaks (either sample or machine): 
 
 https://github.com/m112521/notsoserous-science/assets/85460283/56accc54-1f78-4390-a13b-5404003ea0d3
+
+
+Some broken hearts:
+
+![20230629_182247](https://github.com/m112521/fatigue-machine/assets/85460283/a31a287c-b592-4211-b958-0b256adac7ae)
+
 
