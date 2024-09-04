@@ -2,11 +2,12 @@
 
 TBD:
 - [ ] start button/tumbler;
-- [ ] better/faster stop mechanism;
-- [ ] replace wire hell with custom PCB shield;
-- [ ] bigger motor;
-- [ ] better on-shaft fixation;
-- [ ] replace kolhoz. 
+- [ ] better stop mechanism (bearing, ;
+- [ ] eps32 relay PCB shield;
+- [ ] no display -> web page;
+- [ ] shaft holder aluminum;
+- [ ] arm FFF;
+- [ ] dAmplitude.
 
 
 ![persp](https://github.com/m112521/notsoserous-science/assets/85460283/c4cb47e4-6cf4-4d17-a4c5-280009308a05)
