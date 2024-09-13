@@ -18,10 +18,11 @@ int end = 0;
 volatile int count = 0;
 
 int hallState = LOW; 
-int magState = -1; 
 
 long lastDebounceTime = 0;  
 long debounceDelay = 50;
+
+int state = 0;
 
 
 AsyncWebServer server(80);
@@ -40,7 +41,7 @@ const char index_html[] PROGMEM = R"rawliteral(
         }
         .div2{display: flex;align-content: center;justify-content: center;}
         .div3{display: flex;align-content: center;justify-content: center;}
-        .analog-value{font-size:15rem;}
+        .analog-value{font-size:10rem;}
         .circ-btn{border-radius:100%;border:1px solid red;background:none;width:280px;height:280px;font-size:2rem;}
 </style>
 <div class="parent">
@@ -78,14 +79,16 @@ function initButtons() {
 function toggleBg(btn, state) {
     if (state) {
         btn.style.background = '#ff0000';
+        btn.innerText = "STOP";
     }
     else {
         btn.style.background = '#ffffff';
+        btn.innerText = "START";
     }
 }
 
 function initWebSocket() {
-    console.log('Trying to open a WebSocket connection…');
+    console.log('Trying to open a WebSocket connection');
     websocket = new WebSocket(gateway);
     websocket.onopen = onOpen;
     websocket.onclose = onClose;
@@ -108,7 +111,7 @@ function getReadings(){
 
 function onMessage(event) {
     //console.log(event.data);
-    let json = JSON.parse(event.data)
+    let json = JSON.parse(event.data);
     document.querySelector("#slider-txt").innerHTML = json.count;
 
     if (parseInt(json.end) == 1) {
@@ -202,33 +205,37 @@ void setup() {
   server.begin();
 }
 
+void stateMachine(state) {
+  switch(state):
+    case 0:
+      count = 0; // clear count
+      if (fire == 1) {
+        state = 1;
+      }
+      break;
+    case 1:
+      digitalWrite(MOSFET, HIGH);
+      hallState = digitalRead(HALL_PIN);
+      if ((millis() - lastDebounceTime) > debounceDelay) {
+        if ((hallState == LOW)) {
+          count++;
+          lastDebounceTime = millis();
+        }
+      }
+      if (digitalRead(END_PIN) == HIGH) {
+        state = 2;
+      }
+      break;
+    case 2:
+      digitalWrite(MOSFET, LOW);
+      if (fire == 0) {
+        state = 0;
+      }
+      break;
+}
+
 void loop() {
-  hallState = digitalRead(HALL_PIN);
-
-  if ((millis() - lastDebounceTime) > debounceDelay) {
-    if ((hallState == LOW) && (magState < 0)) {
-      count++;
-      magState = -magState;
-      lastDebounceTime = millis();
-    }
-    else if ((hallState == LOW) && (magState > 0)) {
-      count++;
-      magState = -magState;
-      lastDebounceTime = millis(); 
-    }
-  }
-
-  if (fire == 1) {
-    digitalWrite(MOSFET, HIGH);
-    count = 0;
-    end = 0;
-  }
-
-  if (digitalRead(END_PIN) == HIGH) {
-    end = 1;
-    digitalWrite(MOSFET, LOW);
-  }
-
+  stateMachine(state);
   //Serial.println(count);
 }
 
