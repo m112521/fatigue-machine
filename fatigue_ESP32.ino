@@ -114,11 +114,14 @@ function onMessage(event) {
     let json = JSON.parse(event.data);
     document.querySelector("#slider-txt").innerHTML = json.count;
 
-    if (parseInt(json.end) == 1) {
-      fireState = !fireState;
-      toggleBg(fireBtn, fireState);
-    }
-    websocket.send("getReadings");
+    // if (parseInt(json.end) == 1) {
+    //   fireState = !fireState;
+    //   toggleBg(fireBtn, fireState);
+    //   websocket.send(JSON.stringify({fire:fireState ? 1 : 0}));
+    // }
+    //else {
+      websocket.send("getReadings");
+    //}
 }</script>
 )rawliteral";
 
@@ -160,7 +163,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     if (myObject.hasOwnProperty("fire")) {
       fire = (int)myObject["fire"];      
     }
-
+    
     String sensorReadings = getSensorReadings();
     notifyClients(sensorReadings);
   }
@@ -205,11 +208,11 @@ void setup() {
   server.begin();
 }
 
-void stateMachine(state) {
-  switch(state):
+void stateMachine(int s) {
+  switch(s) { 
     case 0:
       count = 0; // clear count
-      if (fire == 1) {
+      if (fire) {
         state = 1;
       }
       break;
@@ -224,6 +227,7 @@ void stateMachine(state) {
       }
       if (digitalRead(END_PIN) == HIGH) {
         state = 2;
+        //end = 1;
       }
       break;
     case 2:
@@ -232,10 +236,12 @@ void stateMachine(state) {
         state = 0;
       }
       break;
+  }
 }
 
 void loop() {
   stateMachine(state);
-  //Serial.println(count);
+  Serial.println(state);
 }
+
 
