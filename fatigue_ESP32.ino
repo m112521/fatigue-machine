@@ -225,7 +225,7 @@ void stateMachine(int s) {
           lastDebounceTime = millis();
         }
       }
-      if (digitalRead(END_PIN) == HIGH) {
+      if (digitalRead(END_PIN) == HIGH || fire == 0) {
         state = 2;
         //end = 1;
       }
@@ -241,7 +241,6 @@ void stateMachine(int s) {
 
 void loop() {
   stateMachine(state);
-  Serial.println(state);
+  Serial.println(fire);
 }
-
 
