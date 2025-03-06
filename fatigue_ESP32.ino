@@ -17,7 +17,7 @@ int end = 0;
 
 volatile int count = 0;
 
-int hallState = LOW; 
+int hallState = 1; 
 
 long lastDebounceTime = 0;  
 long debounceDelay = 50;
@@ -220,7 +220,7 @@ void stateMachine(int s) {
       digitalWrite(MOSFET, HIGH);
       hallState = digitalRead(HALL_PIN);
       if ((millis() - lastDebounceTime) > debounceDelay) {
-        if ((hallState == LOW)) {
+        if ((hallState == 0)) {
           count++;
           lastDebounceTime = millis();
         }
@@ -241,6 +241,5 @@ void stateMachine(int s) {
 
 void loop() {
   stateMachine(state);
-  Serial.println(fire);
+  Serial.println("state: " + String(state) + " Hall: " + String(hallState) + " count: " + String(count));
 }
-
