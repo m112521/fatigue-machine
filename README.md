@@ -1,32 +1,28 @@
-# Fatigue strength testing machine
+# Fatigue strength testing machine v2
 
-TBD:
-- [ ] start button/tumbler;
-- [ ] better stop mechanism (bearing, ;
-- [ ] eps32 relay PCB shield;
-- [ ] no display -> web page;
-- [ ] shaft holder aluminum;
-- [ ] arm FFF;
-- [ ] dAmplitude.
+Determining the Fatigue Strength of Laser-Cut Samples with Varying "Living Hinge" Patterns
 
+<img width="4080" height="2144" alt="20260730_185705" src="https://github.com/user-attachments/assets/1bda523f-97d1-41e4-8af9-027bc348c968" />
 
-![persp](https://github.com/m112521/notsoserous-science/assets/85460283/c4cb47e4-6cf4-4d17-a4c5-280009308a05)
-
-## Description
-
-Machine for determining the fatigue strength of samples with different patterns (so-called "living hinge", which makes sample exert flexibility) produced using a laser machine.
 
 Hardware:
 
-- Amperka Iskra Neo (Leonardo);
-- Amperka Motor Shield;
-- Amperka Troyka Shield;
-- Hall sensor (involved into counting cycles);
-- Amperka Quad Display.
+- ESP32 Dev Board 38 pin;
+- INA219 current sensor;
+- BOTS PCB;
+- TB6612;
+- Amperka Mosfet module;
+- 12V power supply (18650x3).  
 
 Features:
+
 - autamatic cycle counting;
-- automatic stop (altough with delay).
+- automatic stop (based on current levels);
+- calibration mode;
+- Wi-Fi control.
+
+https://github.com/user-attachments/assets/83fcb0cc-adee-47e8-aa58-8da838eb6570
+
 
 ## Generating samples
 
@@ -38,14 +34,6 @@ Grasshopper definition was designed to make it easier to create different patter
 The process of generating new samples: 
 
 ![gh-sim](https://github.com/m112521/notsoserous-science/assets/85460283/0fa1caf4-b1d9-4dbc-b486-403aa12baab0)
-
-
-## Testing samples
-
-If you wait long enough it breaks (either sample or machine): 
-
-https://github.com/m112521/notsoserous-science/assets/85460283/56accc54-1f78-4390-a13b-5404003ea0d3
-
 
 Some broken hearts:
 
